@@ -1,6 +1,6 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shaka/features/home/presentation/pages/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,16 +44,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// widget list
   final List<Widget> bottomBarPages = [
-    const Page1(),
+    const Home(),
     const Page2(),
-    const Page3(),
-    const Page4(),
-    const Page5(),
+    const Page2(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       body: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
@@ -65,79 +64,49 @@ class _MyHomePageState extends State<MyHomePage> {
               /// Provide NotchBottomBarController
               notchBottomBarController: _controller,
               color: Colors.white,
-              showLabel: false,
+              showLabel: true,
               shadowElevation: 5,
               kBottomRadius: 28.0,
-              // notchShader: const SweepGradient(
-              //   startAngle: 0,
-              //   endAngle: pi / 2,
-              //   colors: [Colors.red, Colors.green, Colors.orange],
-              //   tileMode: TileMode.mirror,
-              // ).createShader(Rect.fromCircle(center: Offset.zero, radius: 8.0)),
               notchColor: Colors.black87,
-
               /// restart app if you change removeMargins
               removeMargins: false,
               bottomBarWidth: 500,
               durationInMilliSeconds: 300,
-              bottomBarItems: [
-                const BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.home_filled,
-                    color: Colors.blueGrey,
-                  ),
-                  activeItem: Icon(
-                    Icons.home_filled,
-                    color: Colors.blueAccent,
-                  ),
-                  itemLabel: 'Page 1',
-                ),
-                const BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.star,
-                    color: Colors.blueGrey,
-                  ),
-                  activeItem: Icon(
-                    Icons.star,
-                    color: Colors.blueAccent,
-                  ),
-                  itemLabel: 'Page 2',
-                ),
-
-                ///svg example
+              bottomBarItems: const [
                 BottomBarItem(
-                  inActiveItem: SvgPicture.asset(
-                    'assets/search_icon.svg',
+                  inActiveItem: Icon(
+                    Icons.home_filled,
                     color: Colors.blueGrey,
                   ),
-                  activeItem: SvgPicture.asset(
-                    'assets/search_icon.svg',
+                  activeItem: Icon(
+                    Icons.home_filled,
                     color: Colors.white,
                   ),
-                  itemLabel: 'Page 3',
+                  itemLabel: 'Home',
                 ),
-                const BottomBarItem(
+                BottomBarItem(
                   inActiveItem: Icon(
-                    Icons.settings,
+                    Icons.history_outlined,
                     color: Colors.blueGrey,
                   ),
                   activeItem: Icon(
-                    Icons.settings,
-                    color: Colors.pink,
+                    Icons.history_outlined,
+                    color: Colors.white,
                   ),
-                  itemLabel: 'Page 4',
+                  itemLabel: 'History',
                 ),
-                const BottomBarItem(
+                BottomBarItem(
                   inActiveItem: Icon(
                     Icons.person,
                     color: Colors.blueGrey,
                   ),
                   activeItem: Icon(
                     Icons.person,
-                    color: Colors.yellow,
+                    color: Colors.white,
                   ),
-                  itemLabel: 'Page 5',
+                  itemLabel: 'Account',
                 ),
+
               ],
               onTap: (index) {
                 /// perform action on tab change and to update pages you can update pages without pages
