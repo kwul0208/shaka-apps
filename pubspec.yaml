@@ -39,10 +39,26 @@ dependencies:
   flutter_svg: ^2.0.10+1
   google_fonts: ^6.1.0
   flutter_slidable: ^3.0.1
+  flutter_native_splash: ^2.3.11
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+#spash screen
+#run flutter pub run flutter_native_splash:create when you want to change splachscreen
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/logo-app-name.png
+
+#icon apps
+#run flutter pub run flutter_launcher_icons:main when you want to change icon apps
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo-app-black.png"
+  remove_alpha_ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
