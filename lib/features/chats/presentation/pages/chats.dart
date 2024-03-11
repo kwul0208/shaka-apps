@@ -101,18 +101,20 @@ class Chat extends StatelessWidget {
                                               itemCount: 10,
                                               itemBuilder: (context, index) => Padding(
                                                 padding: const EdgeInsets.symmetric(horizontal: appPadding, vertical: appPadding/2),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    color: bgColor,
-                                                    borderRadius: BorderRadius.circular(appPadding)
-                                                  ),
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.all(appPadding),
-                                                    child: Column(
-                                                      children: [
-                                                        Text("Title", style: TextStyle(fontWeight: FontWeight.w500,  fontSize: 18),),
-                                                        Text("subTitle aasad sd sd asa", style: TextStyle(color: lightTextColor,  fontSize: 14),)
-                                                      ],
+                                                child: Material(
+                                                  color: bgColor,
+                                                  borderRadius: BorderRadius.circular(appPadding),
+                                                  child: InkWell(
+                                                  borderRadius: BorderRadius.circular(appPadding),
+                                                    onTap: (){},
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(appPadding),
+                                                      child: Column(
+                                                        children: [
+                                                          Text("Title", style: TextStyle(fontWeight: FontWeight.w500,  fontSize: 18),),
+                                                          Text("subTitle aasad sd sd asa", style: TextStyle(color: lightTextColor,  fontSize: 14),)
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
