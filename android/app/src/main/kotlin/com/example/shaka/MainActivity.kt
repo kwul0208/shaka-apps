@@ -1,4 +1,4 @@
-package com.example.shaka
+package com.shaka.ai
 
 import io.flutter.embedding.android.FlutterActivity
 

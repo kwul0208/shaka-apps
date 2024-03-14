@@ -48,7 +48,9 @@ class Home extends StatelessWidget {
                 borderRadius: BorderRadius.circular(appPadding),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(appPadding),
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
+                  },
                   child: const CardMenu(imageAsset: "assets/images/ChatGpt-Logo-black_white.png", title: " GPT-4", sub_title: "A chat prompt powered by ChatGPT-4 technology.",),
                 ),
               ),
@@ -61,7 +63,9 @@ class Home extends StatelessWidget {
                 borderRadius: BorderRadius.circular(appPadding),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(appPadding),
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
+                  },
                   child: const CardMenu(imageAsset: "assets/images/Screenshot_2024-02-24_at_20.48.35-removebg-preview.png", title: "Image Generator", sub_title: "Build your image with chat prompt.",),
                 ),
               ),
