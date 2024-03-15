@@ -7,3 +7,4 @@ const bgColor = Color.fromARGB(255, 248, 247, 247);
 const textColor = Colors.black;
 const lightTextColor = Colors.black26;
 const transparent = Colors.transparent;
+const red = Colors.red;

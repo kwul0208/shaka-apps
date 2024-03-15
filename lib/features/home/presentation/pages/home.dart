@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shaka/constants/constants.dart';
 import 'package:shaka/constants/responsive.dart';
 import 'package:shaka/features/chats/presentation/pages/chats.dart';
+import 'package:shaka/features/chats/provider/chat_state.dart';
 import 'package:shaka/features/home/presentation/widgets/card_menu.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,6 +36,7 @@ class Home extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(appPadding),
                   onTap: (){
+                    Provider.of<ChatState>(context,  listen: false).chat.clear();
                     Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
                   },
                   child: const CardMenu(imageAsset: "assets/images/ChatGPT-logo-green_white.png", title: "ChatGPT", sub_title: "A chat prompt powered by ChatGPT technology.",),
