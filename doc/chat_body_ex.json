@@ -1,33 +1,48 @@
 {
-    "model": "gpt-3.5-turbo",
-    "messages": [
-        {
-            "role": "user",
-            "content": "minyak apa yg bagus?"
+    "response": {
+        "chat_prompt": {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "minyak apa yg bagus?"
+                },
+                {
+                "role": "assistant",
+                "content": "Ada beberapa jenis minyak yang dianggap bagus untuk kesehatan dan kecantikan, antara lain:\n\n1. Minyak zaitun: Kaya akan antioksidan dan asam lemak omega-3, minyak zaitun baik untuk kesehatan jantung dan kulit.\n\n2. Minyak kelapa: Mengandung lemak sehat lauric acid yang dapat meningkatkan metabolisme dan mendukung sistem kekebalan tubuh.\n\n3. Minyak biji rami: Kaya akan asam lemak omega-3 dan omega-6 yang baik untuk kesehatan otak dan kulit.\n\n4. Minyak ikan: Sumber omega-3 yang baik untuk kesehatan jantung, otak, dan fungsi tubuh lainnya.\n\n5. Minyak almond: Mengandung vitamin E dan lemak sehat yang baik untuk kulit dan rambut.\n\nPilihan minyak terbaik tergantung pada kebutuhan individu dan preferensi pribadi. Sebaiknya konsultasikan dengan ahli gizi atau dokter se"
+              },
+              {
+                    "role": "user",
+                    "content": "Bagaimana dengan minyak goreng yang dipakai berulang kali"
+                },
+                {
+                "role": "assistant",
+                "content": "Menggunakan minyak goreng berulang kali dapat membawa risiko kesehatan karena minyak akan mengalami oksidasi dan pembentukan senyawa berbahaya ketika dipanaskan berulang kali. Beberapa dampak negatif dari penggunaan minyak goreng berulang kali antara lain:\n\n1. Peningkatan kadar senyawa berbahaya: Ketika minyak dipanaskan ulang, senyawa berbahaya seperti aldehida dan radikal bebas dapat terbentuk. Senyawa ini dapat meningkatkan risiko penyakit jantung, inflamasi, dan kanker.\n\n2. Menurunnya kualitas nutrisi: Proses pemanasan berulang dapat membuat nutrisi dalam minyak menjadi rusak atau terurai, sehingga minyak tersebut kehilangan manfaat kesehatan yang seharusnya.\n\n3. Menurunkan rasa dan aroma: Minyak yang digunakan berulang kali cenderung menghasilkan makanan yang kurang enak dan berbau tidak sedap.\n\nSeba"
+              },
+              {
+                    "role": "user",
+                    "content": "Jadi bahaya ya"
+                }
+        
+            ],
+            "temperature": 1,
+            "top_p": 1,
+            "n": 1,
+            "stream": false,
+            "max_tokens": 250,
+            "presence_penalty": 0,
+            "frequency_penalty": 0
         },
-        {
-        "role": "assistant",
-        "content": "Ada beberapa jenis minyak yang dianggap bagus untuk kesehatan dan kecantikan, antara lain:\n\n1. Minyak zaitun: Kaya akan antioksidan dan asam lemak omega-3, minyak zaitun baik untuk kesehatan jantung dan kulit.\n\n2. Minyak kelapa: Mengandung lemak sehat lauric acid yang dapat meningkatkan metabolisme dan mendukung sistem kekebalan tubuh.\n\n3. Minyak biji rami: Kaya akan asam lemak omega-3 dan omega-6 yang baik untuk kesehatan otak dan kulit.\n\n4. Minyak ikan: Sumber omega-3 yang baik untuk kesehatan jantung, otak, dan fungsi tubuh lainnya.\n\n5. Minyak almond: Mengandung vitamin E dan lemak sehat yang baik untuk kulit dan rambut.\n\nPilihan minyak terbaik tergantung pada kebutuhan individu dan preferensi pribadi. Sebaiknya konsultasikan dengan ahli gizi atau dokter se"
-      },
-      {
-            "role": "user",
-            "content": "Bagaimana dengan minyak goreng yang dipakai berulang kali"
-        },
-        {
-        "role": "assistant",
-        "content": "Menggunakan minyak goreng berulang kali dapat membawa risiko kesehatan karena minyak akan mengalami oksidasi dan pembentukan senyawa berbahaya ketika dipanaskan berulang kali. Beberapa dampak negatif dari penggunaan minyak goreng berulang kali antara lain:\n\n1. Peningkatan kadar senyawa berbahaya: Ketika minyak dipanaskan ulang, senyawa berbahaya seperti aldehida dan radikal bebas dapat terbentuk. Senyawa ini dapat meningkatkan risiko penyakit jantung, inflamasi, dan kanker.\n\n2. Menurunnya kualitas nutrisi: Proses pemanasan berulang dapat membuat nutrisi dalam minyak menjadi rusak atau terurai, sehingga minyak tersebut kehilangan manfaat kesehatan yang seharusnya.\n\n3. Menurunkan rasa dan aroma: Minyak yang digunakan berulang kali cenderung menghasilkan makanan yang kurang enak dan berbau tidak sedap.\n\nSeba"
-      },
-      {
-            "role": "user",
-            "content": "Jadi bahaya ya"
+        "image_generator": {
+            "created": 1710773973,
+            "data": [
+                {
+                    "revised_prompt": "Design a logo for an AI chat application named 'SHAKA'. The logo should be reminiscent of the sleek and minimalist aesthetic of early 20th century design, prior to 1912. Focus on simplicity and bold typography, not too intricate or elaborate, but identifiable and catchy. The design should emphasize the innovative nature of AI and embody the essence of a chat platform.",
+                    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-EsysHo7DOLdl5SZruo30EUFX/user-xQCBmp2Up3NbQDF7nzNrQ9En/img-Fm51hTAaSrcT4rtJ3oavDWxA.png?st=2024-03-18T13%3A59%3A33Z&se=2024-03-18T15%3A59%3A33Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-03-18T06%3A57%3A10Z&ske=2024-03-19T06%3A57%3A10Z&sks=b&skv=2021-08-06&sig=H6CzkSn%2BKcRd06dRytmvQe8dGzYHMXV72AxhxVQmXQo%3D"
+                }
+            ]
         }
-
-    ],
-    "temperature": 1,
-    "top_p": 1,
-    "n": 1,
-    "stream": false,
-    "max_tokens": 250,
-    "presence_penalty": 0,
-    "frequency_penalty": 0
+    }
 }
+
+
