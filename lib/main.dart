@@ -4,11 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:shaka/features/chats/provider/chat_state.dart';
 import 'package:shaka/features/history/pages/history.dart';
 import 'package:shaka/features/home/presentation/pages/home.dart';
+import 'package:shaka/features/image_generator/provider/chat_state.dart';
 
 void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => ChatState(),),
+      ChangeNotifierProvider(create: (context) => ChatStateImage(),),
     ],
     child: MyApp(),
   ));

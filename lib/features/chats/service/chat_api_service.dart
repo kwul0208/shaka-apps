@@ -10,10 +10,10 @@ import 'package:shaka/global_widgets/alert_widget.dart';
 
 class ChatApiService{
   static Future postChat(context , model, List message) async {
-    // await Future.delayed(Duration(seconds: 2));
-    // Provider.of<ChatState>(context, listen: false).changeWaitResponse();
-    // Provider.of<ChatState>(context, listen: false).addNewChat(ChatModel(role: 'assistant', content: 'GPT-4 is a large multimodal model (accepting text or image inputs and outputting text) that can solve difficult problems with greater accuracy than any of our previous models, thanks to its broader general knowledge and advanced reasoning capabilities. GPT-4 is available in the OpenAI API to paying customers. Like gpt-3.5-turbo, GPT-4 is optimized for chat but works well for traditional completions tasks using the Chat Completions API. Learn how to use GPT-4 in our text generation guide.'));
-    //       return {'status': 200, 'message': 'Success'};
+    await Future.delayed(Duration(seconds: 2));
+    Provider.of<ChatState>(context, listen: false).changeWaitResponse();
+    Provider.of<ChatState>(context, listen: false).addNewChat(ChatModel(role: 'assistant', content: 'GPT-4 is a large multimodal model (accepting text or image inputs and outputting text) that can solve difficult problems with greater accuracy than any of our previous models, thanks to its broader general knowledge and advanced reasoning capabilities. GPT-4 is available in the OpenAI API to paying customers. Like gpt-3.5-turbo, GPT-4 is optimized for chat but works well for traditional completions tasks using the Chat Completions API. Learn how to use GPT-4 in our text generation guide.'));
+          return {'status': 200, 'message': 'Success'};
     // print(message);return null;
     try {
       var headers = {

@@ -6,6 +6,8 @@ import 'package:shaka/features/chats/presentation/pages/chats.dart';
 import 'package:shaka/features/chats/provider/chat_state.dart';
 import 'package:shaka/features/home/presentation/widgets/card_menu.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shaka/features/image_generator/presentation/pages/chats.dart';
+import 'package:shaka/features/image_generator/provider/chat_state.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -70,9 +72,9 @@ class Home extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(appPadding),
                   onTap: (){
-                    Provider.of<ChatState>(context,  listen: false).chat.clear();
-                    Provider.of<ChatState>(context, listen: false).initVarChat("dall-e-3", "assets/images/Screenshot_2024-02-24_at_20.48.35-removebg-preview.png", "Image Generator");
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
+                    Provider.of<ChatStateImage>(context,  listen: false).chat.clear();
+                    Provider.of<ChatStateImage>(context, listen: false).initVarChat("dall-e-3", "assets/images/Screenshot_2024-02-24_at_20.48.35-removebg-preview.png", "Image Generator");
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ChatImage()));
                   },
                   child: const CardMenu(imageAsset: "assets/images/Screenshot_2024-02-24_at_20.48.35-removebg-preview.png", title: "Image Generator", sub_title: "Build your image with chat prompt.",),
                 ),
