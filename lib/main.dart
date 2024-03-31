@@ -5,8 +5,11 @@ import 'package:shaka/features/chats/provider/chat_state.dart';
 import 'package:shaka/features/history/pages/history.dart';
 import 'package:shaka/features/home/presentation/pages/home.dart';
 import 'package:shaka/features/image_generator/provider/chat_state.dart';
+import 'package:shaka/local_services/sqlite_service.dart';
 
-void main() {
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+  await SqliteService().initializeDB();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => ChatState(),),
@@ -56,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> bottomBarPages = [
     const Home(),
     const History(),
-    const Page2(),
+    // const Page2(),
   ];
 
   @override
@@ -105,17 +108,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   itemLabel: 'History',
                 ),
-                BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.person,
-                    color: Colors.blueGrey,
-                  ),
-                  activeItem: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  itemLabel: 'Account',
-                ),
+                // BottomBarItem(
+                //   inActiveItem: Icon(
+                //     Icons.person,
+                //     color: Colors.blueGrey,
+                //   ),
+                //   activeItem: Icon(
+                //     Icons.person,
+                //     color: Colors.white,
+                //   ),
+                //   itemLabel: 'Account',
+                // ),
 
               ],
               onTap: (index) {

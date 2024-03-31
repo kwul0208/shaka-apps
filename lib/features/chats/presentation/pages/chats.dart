@@ -9,15 +9,29 @@ import 'package:shaka/features/chats/model/data_example.dart';
 import 'package:shaka/features/chats/provider/chat_state.dart';
 import 'package:shaka/features/chats/service/chat_api_service.dart';
 import 'package:shaka/global_widgets/alert_widget.dart';
+import 'package:shaka/local_services/sqlite_service.dart';
 
-class Chat extends StatelessWidget {
-  Chat({super.key});
+class Chat extends StatefulWidget {
+  Chat({super.key, this.chat_id});
+  final int? chat_id;
+
+  @override
+  State<Chat> createState() => _ChatState();
+}
+
+class _ChatState extends State<Chat> {
+  bool isAnimating = true;
+
+  List<ChatModel> chats = [];
 
   ScrollController scrollController = ScrollController();
   ScrollController scrollControllerChat = ScrollController();
 
-  bool isAnimating = true;
-
+  @override
+  void initState() {
+    super.initState();
+    if(widget.chat_id != null) getDetailChat(widget.chat_id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +141,7 @@ class Chat extends StatelessWidget {
                                                         borderRadius: BorderRadius.circular(appPadding),
                                                           onTap: (){
                                                             Provider.of<ChatState>(scaffoldContext, listen: false).addNewChat(ChatModel(role: "user", content: data_example[index]['value']));
-                                                            ChatApiService.postChat(scaffoldContext, data.model, [{"role": "user", "content": data_example[index]['value']}]);
+                                                            ChatApiService.postChat(scaffoldContext, data.model, [{"role": "user", "content": data_example[index]['value']}], data.img, data.model_name, data_example[index]['value']);
                                                             Provider.of<ChatState>(scaffoldContext, listen: false).changeWaitResponse();
                                                             Provider.of<ChatState>(scaffoldContext, listen: false).changeLodaBtn(true);
                                                             Navigator.pop(context);
@@ -193,7 +207,7 @@ class Chat extends StatelessWidget {
                             // minVerticalPadding: -10,
                             isThreeLine: true,
                             dense: true,
-                            leading: CircleAvatar(backgroundImage: AssetImage("assets/images/ChatGPT-logo-green_white.png"), radius: 14,),
+                            leading: CircleAvatar(backgroundImage: AssetImage(data.img), radius: 14,),
                             title: Text("ChatGPT", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                             subtitle: Align(
                               alignment: Alignment.centerLeft, // Posisikan teks animasi di kiri
@@ -230,7 +244,7 @@ class Chat extends StatelessWidget {
                                             data.chat[i].content,
                                             textStyle: TextStyle(fontSize: 14.0),
                                             textAlign: TextAlign.start,
-                                            speed: Duration(milliseconds: 10), 
+                                            speed: widget.chat_id == null ? Duration(milliseconds: 10) : Duration.zero, //history condition
                                           ),
                                         ],
                                         totalRepeatCount: 1,
@@ -275,8 +289,6 @@ class Chat extends StatelessWidget {
                       },
                     ),
                   );
-
-
                 }
               }
             ),
@@ -285,7 +297,15 @@ class Chat extends StatelessWidget {
         ],
       ),
     );
-  }                                     
+  } 
+
+  Future<void> getDetailChat(chat_id)async{
+    chats = await SqliteService.getItemsDetail(chat_id);
+    for (var e in chats) {
+      print([e.created_at, e.content]);
+    }
+    Provider.of<ChatState>(context, listen: false).initChat(chats);
+  }                                    
 }
 
 class _MessageBar extends StatefulWidget {
@@ -355,7 +375,6 @@ class _MessageBarState extends State<_MessageBar> {
                         onTap: () {
                           FocusScope.of(context).unfocus();
                           Provider.of<ChatState>(context, listen: false).addNewChat(ChatModel(role: "user", content: _textController.text));
-                          _textController.clear();
                           Provider.of<ChatState>(context, listen: false).changeWaitResponse();
                           Provider.of<ChatState>(context, listen: false).changeLodaBtn(true);
                       
@@ -368,7 +387,9 @@ class _MessageBarState extends State<_MessageBar> {
                             };
                           }).toList();
                           
-                          ChatApiService.postChat(context, widget.dataState.model, dataChatMap);
+                          ChatApiService.postChat(context, widget.dataState.model, dataChatMap, data.img, data.model_name, _textController.text);
+                          _textController.clear();
+
                       
                           widget.scrollControllerChat.animateTo(
                             widget.scrollControllerChat.position.maxScrollExtent,

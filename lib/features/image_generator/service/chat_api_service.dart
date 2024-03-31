@@ -6,22 +6,37 @@ import 'package:http/http.dart' as http;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
 import 'package:shaka/env.dart';
+import 'package:shaka/features/history/model/chat_history_model.dart';
 import 'package:shaka/features/image_generator/model/chat_model.dart';
 import 'package:shaka/features/image_generator/provider/chat_state.dart';
 import 'package:shaka/global_widgets/alert_widget.dart';
+import 'package:shaka/helper/helper.dart';
+import 'package:shaka/local_services/sqlite_service.dart';
 
 class ChatImageApiService{
-  static Future postChat(context , String model, String message) async {
-    print({
-        "prompt": message,
-        "n": 1,
-        "size": "1024x1024",
-        "model": model
-      });
+  static Future postChat(context , String model, String message, String img_model, String model_name) async {
+    bool is_first_chat = Provider.of<ChatStateImage>(context, listen: false).is_first_chat;
+    int id = Provider.of<ChatStateImage>(context, listen: false).id;
+    String exMsg = 'GPT-4 is a large multimodal model (accepting text or image inputs and outputting text) that can solve difficult problems with greater accuracy than any of our previous models, thanks to its broader general knowledge and advanced reasoning capabilities. GPT-4 is available in the OpenAI API to paying customers. Like gpt-3.5-turbo, GPT-4 is optimized for chat but works well for traditional completions tasks using the Chat Completions API. Learn how to use GPT-4 in our text generation guide.';
+
     await Future.delayed(Duration(seconds: 2));
     Provider.of<ChatStateImage>(context, listen: false).changeWaitResponse();
-    Provider.of<ChatStateImage>(context, listen: false).addNewChat(ChatModelImage(role: 'assistant', revised_prompt: 'GPT-4 is a large multimodal model (accepting text or image inputs and outputting text) that can solve difficult problems with greater accuracy than any of our previous models, thanks to its broader general knowledge and advanced reasoning capabilities. GPT-4 is available in the OpenAI API to paying customers. Like gpt-3.5-turbo, GPT-4 is optimized for chat but works well for traditional completions tasks using the Chat Completions API. Learn how to use GPT-4 in our text generation guide.', url: 'https://res.cloudinary.com/kwul0208/image/upload/v1658222901/cld-sample-5.jpg'));
-          return {'status': 200, 'message': 'Success'};
+    String converted_img = await convertImgBase64('https://res.cloudinary.com/kwul0208/image/upload/v1658222901/cld-sample-5.jpg');
+    Provider.of<ChatStateImage>(context, listen: false).addNewChat(ChatModelImage(role: 'assistant', revised_prompt: exMsg, url: converted_img));
+
+    
+    if (is_first_chat) {
+      final int createdItemId = await SqliteService.createItem(ChatHistoryModel(id: 2, img_model: img_model, model_name: model_name, first_message: cutString(message, 60), updated_at: DateTime.now().toString(), local: 'true'));
+
+      await SqliteService.createItemDetailImage(ChatModelImage(chat_id: createdItemId ,role: 'user', revised_prompt: message, created_at: DateTime.now().toString(), url: '', local: 'true'));
+      await SqliteService.createItemDetailImage(ChatModelImage(chat_id: createdItemId ,role: 'assistant', revised_prompt: exMsg, created_at: DateTime.now().toString(), url: converted_img, local: 'true'));
+      Provider.of<ChatStateImage>(context, listen: false).changeIsFirstChat(false, createdItemId);
+    } else {
+      SqliteService.editItem(ChatHistoryModel(id: id, img_model: img_model, model_name: model_name, first_message: cutString(message, 60), updated_at: DateTime.now().toString(), local: 'true'));
+      await SqliteService.createItemDetailImage(ChatModelImage(chat_id: id ,role: 'user', revised_prompt: message, created_at: DateTime.now().toString(), url: '', local: 'true'));
+      await SqliteService.createItemDetailImage(ChatModelImage(chat_id: id ,role: 'assistant', revised_prompt: exMsg, created_at: DateTime.now().toString(), url: converted_img, local: 'true'));
+    }
+    return {'status': 200, 'message': 'Success'};
     // print(message);return null;
     try {
       var headers = {

@@ -13,7 +13,8 @@ class  ChatStateImage extends ChangeNotifier{
   initVarChat(String model, String img, String model_name){
     _model = model;
     _img = img;
-    _model_name = model_name;notifyListeners();
+    _model_name = model_name;
+    notifyListeners();
 
   }
 
@@ -36,6 +37,21 @@ class  ChatStateImage extends ChangeNotifier{
   bool get lodaBtn => _loadBtn;
   changeLodaBtn(bool val){
     _loadBtn = val;
+    notifyListeners();
+  }
+
+  initChat(List<ChatModelImage> cm){
+    _chat = cm;
+    notifyListeners();
+  }
+
+  bool _is_first_chat = true;
+  bool get is_first_chat => _is_first_chat;
+  int _id = 0;
+  int get id => _id;
+  changeIsFirstChat(bool val, int valId){
+    _is_first_chat = val;
+    _id = valId;
     notifyListeners();
   }
 

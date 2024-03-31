@@ -13,7 +13,8 @@ class  ChatState extends ChangeNotifier{
   initVarChat(String model, String img, String model_name){
     _model = model;
     _img = img;
-    _model_name = model_name;notifyListeners();
+    _model_name = model_name;
+    notifyListeners();
 
   }
 
@@ -22,6 +23,11 @@ class  ChatState extends ChangeNotifier{
 
   addNewChat(ChatModel cm){
     _chat.add(cm);
+    notifyListeners();
+  }
+
+  initChat(List<ChatModel> cm){
+    _chat = cm;
     notifyListeners();
   }
 
@@ -39,5 +45,14 @@ class  ChatState extends ChangeNotifier{
     notifyListeners();
   }
 
+  bool _is_first_chat = true;
+  bool get is_first_chat => _is_first_chat;
+  int _id = 0;
+  int get id => _id;
+  changeIsFirstChat(bool val, int valId){
+    _is_first_chat = val;
+    _id = valId;
+    notifyListeners();
+  }
 
 }

@@ -1,24 +1,42 @@
+import 'dart:convert';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shaka/constants/constants.dart';
 import 'package:shaka/constants/responsive.dart';
-import 'package:shaka/features/chats/service/chat_api_service.dart';
 import 'package:shaka/features/image_generator/model/chat_model.dart';
 import 'package:shaka/features/image_generator/model/data_example_img.dart';
 import 'package:shaka/features/image_generator/presentation/widgets/BuildImage.dart';
 import 'package:shaka/features/image_generator/provider/chat_state.dart';
 import 'package:shaka/features/image_generator/service/chat_api_service.dart';
 import 'package:shaka/global_widgets/alert_widget.dart';
+import 'package:http/http.dart' as http;
+import 'package:shaka/local_services/sqlite_service.dart';
 
-class ChatImage extends StatelessWidget {
-  ChatImage({super.key});
+
+class ChatImage extends StatefulWidget {
+  ChatImage({super.key, this.chat_id});
+  final int? chat_id;
+
+
+  @override
+  State<ChatImage> createState() => _ChatImageState();
+}
+
+class _ChatImageState extends State<ChatImage> {
+  List<ChatModelImage> chats = [];
 
   ScrollController scrollController = ScrollController();
   ScrollController scrollControllerChat = ScrollController();
 
-  bool isAnimating = true;
+  @override
+  void initState() {
+    super.initState();
+    if(widget.chat_id != null) getDetailChat(widget.chat_id);
+
+  }
 
 
   @override
@@ -129,7 +147,7 @@ class ChatImage extends StatelessWidget {
                                                         borderRadius: BorderRadius.circular(appPadding),
                                                           onTap: (){
                                                             Provider.of<ChatStateImage>(scaffoldContext, listen: false).addNewChat(ChatModelImage(role: "user", revised_prompt: data_example_img[index]['value']));
-                                                            ChatImageApiService.postChat(scaffoldContext, data.model, data_example_img[index]['value']);
+                                                            ChatImageApiService.postChat(scaffoldContext, data.model, data_example_img[index]['value'], data.img, data.model_name);
                                                             Provider.of<ChatStateImage>(scaffoldContext, listen: false).changeWaitResponse();
                                                             Provider.of<ChatStateImage>(scaffoldContext, listen: false).changeLodaBtn(true);
                                                             Navigator.pop(context);
@@ -232,7 +250,7 @@ class ChatImage extends StatelessWidget {
                                             "Revised Prompt:  ${data.chat[i].revised_prompt}",
                                             textStyle: TextStyle(fontSize: 14.0),
                                             textAlign: TextAlign.start,
-                                            speed: Duration(milliseconds: 10), 
+                                            speed: widget.chat_id == null ? Duration(milliseconds: 10) : Duration.zero, //history condition
                                           ),
                                         ],
                                         isRepeatingAnimation: false,
@@ -315,7 +333,17 @@ class ChatImage extends StatelessWidget {
         ],
       ),
     );
-  }                                     
+  }   
+
+  Future<void> getDetailChat(chat_id)async{
+    chats = await SqliteService.getItemsDetailImage(chat_id);
+    print("chats ${widget.chat_id}");
+    print(chats);
+    for (var e in chats) {
+      print([e.revised_prompt,  e.role, e.url, e.url]);
+    }
+    Provider.of<ChatStateImage>(context, listen: false).initChat(chats);
+  }                                 
 }
 
 class _MessageBar extends StatefulWidget {
@@ -388,7 +416,7 @@ class _MessageBarState extends State<_MessageBar> {
                           Provider.of<ChatStateImage>(context, listen: false).addNewChat(ChatModelImage(role: "user", revised_prompt: _textController.text));
                           Provider.of<ChatStateImage>(context, listen: false).changeWaitResponse();
                           Provider.of<ChatStateImage>(context, listen: false).changeLodaBtn(true);
-                          ChatImageApiService.postChat(context, widget.dataState.model, _textController.text);
+                          ChatImageApiService.postChat(context, widget.dataState.model, _textController.text, data.img, data.model_name);
                           _textController.clear();
                       
                           // widget.scrollControllerChat.animateTo(
