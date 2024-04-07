@@ -39,6 +39,7 @@ class Home extends StatelessWidget {
                   borderRadius: BorderRadius.circular(appPadding),
                   onTap: (){
                     Provider.of<ChatState>(context,  listen: false).chat.clear();
+                    Provider.of<ChatState>(context,  listen: false).changeLodaBtn(false);
                     Provider.of<ChatState>(context, listen: false).initVarChat("gpt-3.5-turbo", "assets/images/ChatGPT-logo-green_white.png", "GPT 3.5");
                     Provider.of<ChatState>(context, listen: false).changeIsFirstChat(true, 0);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
@@ -57,6 +58,7 @@ class Home extends StatelessWidget {
                   borderRadius: BorderRadius.circular(appPadding),
                   onTap: (){
                     Provider.of<ChatState>(context,  listen: false).chat.clear();
+                    Provider.of<ChatState>(context,  listen: false).changeLodaBtn(false);
                     Provider.of<ChatState>(context, listen: false).initVarChat("gpt-4-turbo-preview", "assets/images/ChatGpt-Logo-black_white.png", "GPT 4");
                     Provider.of<ChatState>(context, listen: false).changeIsFirstChat(true, 0);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
@@ -75,6 +77,7 @@ class Home extends StatelessWidget {
                   borderRadius: BorderRadius.circular(appPadding),
                   onTap: (){
                     Provider.of<ChatStateImage>(context,  listen: false).chat.clear();
+                    Provider.of<ChatStateImage>(context,  listen: false).changeLodaBtn(false);
                     Provider.of<ChatStateImage>(context, listen: false).initVarChat("dall-e-3", "assets/images/Screenshot_2024-02-24_at_20.48.35-removebg-preview.png", "Image Generator");
                     Provider.of<ChatStateImage>(context, listen: false).changeIsFirstChat(true, 0);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => ChatImage()));

@@ -41,6 +41,7 @@ class  ChatState extends ChangeNotifier{
   bool _loadBtn = false;
   bool get lodaBtn => _loadBtn;
   changeLodaBtn(bool val){
+    print(val);
     _loadBtn = val;
     notifyListeners();
   }

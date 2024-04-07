@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ import 'package:shaka/features/image_generator/presentation/widgets/BuildImage.d
 import 'package:shaka/features/image_generator/provider/chat_state.dart';
 import 'package:shaka/features/image_generator/service/chat_api_service.dart';
 import 'package:shaka/global_widgets/alert_widget.dart';
-import 'package:http/http.dart' as http;
 import 'package:shaka/local_services/sqlite_service.dart';
 
 

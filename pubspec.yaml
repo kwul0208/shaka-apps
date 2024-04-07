@@ -50,6 +50,7 @@ dependencies:
   dio: ^5.4.1
   sqflite: ^2.3.2
   path: ^1.8.3
+  upgrader: ^10.0.1
 
 dev_dependencies:
   flutter_test:

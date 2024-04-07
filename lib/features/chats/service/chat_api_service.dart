@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:shaka/constants/constants.dart';
 import 'package:shaka/env.dart';
 import 'package:shaka/features/chats/model/chat_model.dart';
 import 'package:shaka/features/chats/provider/chat_state.dart';

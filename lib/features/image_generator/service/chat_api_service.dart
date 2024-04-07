@@ -26,12 +26,14 @@ class ChatImageApiService{
 
     
     if (is_first_chat) {
+      print("frist");
       final int createdItemId = await SqliteService.createItem(ChatHistoryModel(id: 2, img_model: img_model, model_name: model_name, first_message: cutString(message, 60), updated_at: DateTime.now().toString(), local: 'true'));
 
       await SqliteService.createItemDetailImage(ChatModelImage(chat_id: createdItemId ,role: 'user', revised_prompt: message, created_at: DateTime.now().toString(), url: '', local: 'true'));
       await SqliteService.createItemDetailImage(ChatModelImage(chat_id: createdItemId ,role: 'assistant', revised_prompt: exMsg, created_at: DateTime.now().toString(), url: converted_img, local: 'true'));
       Provider.of<ChatStateImage>(context, listen: false).changeIsFirstChat(false, createdItemId);
     } else {
+      print("second");
       SqliteService.editItem(ChatHistoryModel(id: id, img_model: img_model, model_name: model_name, first_message: cutString(message, 60), updated_at: DateTime.now().toString(), local: 'true'));
       await SqliteService.createItemDetailImage(ChatModelImage(chat_id: id ,role: 'user', revised_prompt: message, created_at: DateTime.now().toString(), url: '', local: 'true'));
       await SqliteService.createItemDetailImage(ChatModelImage(chat_id: id ,role: 'assistant', revised_prompt: exMsg, created_at: DateTime.now().toString(), url: converted_img, local: 'true'));
@@ -76,13 +78,23 @@ class ChatImageApiService{
     }
   }
 
-  static Future saveImage(String image_url)async{
-    var response = await Dio().get(
-        image_url,
-        options: Options(responseType: ResponseType.bytes));
-        final result = await ImageGallerySaver.saveImage(
-        Uint8List.fromList(response.data),
-        quality: 60,
-        name: "Shaka GPT");
+  static Future saveImage(String base64String)async{
+    // var response = await Dio().get(
+    //     image_url,
+    //     options: Options(responseType: ResponseType.bytes));
+    //     final result = await ImageGallerySaver.saveImage(
+    //     Uint8List.fromList(response.data),
+    //     quality: 60,
+    //     name: "Shaka GPT");
+
+    Uint8List bytes = base64Decode(base64String);
+
+    final result = await ImageGallerySaver.saveImage(
+      bytes,
+      quality: 60,
+      name: "Shaka GPT",
+    );
+
+    return  result;
   }
 }
